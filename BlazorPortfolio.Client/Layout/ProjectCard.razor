@@ -1,0 +1,41 @@
+﻿@using BlazorPortfolio.Client.Models
+@inject NavigationManager Navigation
+
+<MudCard>
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@Project?.Title ?? "No Title"</MudText>
+        <MudText>@Project?.Description ?? "No Description Available"</MudText>
+
+        <MudDivider />
+        <MudText Typo="Typo.subtitle2">Technologies</MudText>
+        <MudChipSet T="string">
+            @if (Project?.Technologies != null)
+            {
+                @foreach (var tech in Project.Technologies)
+                {
+                    <MudChip Color="Color.Primary">@tech</MudChip>
+                }
+            }
+        </MudChipSet>
+        <MudDivider />
+        <MudText Typo="Typo.subtitle2">Key Features</MudText>
+        <ul>
+            @if (Project?.KeyFeatures != null)
+            {
+                @foreach (var feature in Project.KeyFeatures)
+                {
+                    <li>@feature</li>
+                }
+            }
+        </ul>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => Navigation.NavigateTo(Project.DemoLink))">Demo</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="@(() => Navigation.NavigateTo(Project.RepositoryLink))">Repository</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@code {
+    [Parameter]
+    public Project Project { get; set; }
+}
