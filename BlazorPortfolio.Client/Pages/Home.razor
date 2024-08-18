@@ -1,7 +1,33 @@
 ﻿@page "/"
+@using BlazorPortfolio.Client.Models
+@inject PortfolioService _service
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+@if(Portfolio == null)
+{
+    <p><em>Loading...</em></p>
+
+} else
+{
+    <MudContainer MaxWidth="MaxWidth.Large">
+        <MudGrid>
+            @foreach (var project in Portfolio.Projects)
+            {
+                <MudItem xs="12" sm="6" md="4">
+                    <ProjectCard Project="project" />
+                </MudItem>
+            }
+        </MudGrid>
+    </MudContainer>
+}
+
+@code {
+    private Portfolio? Portfolio = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Portfolio = await _service.GetPortfolioAsync();
+    }
+}
