@@ -1,0 +1,34 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - dev  # Change this to your main branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.x'  # Use the .NET version you're using
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build Blazor app
+        run: dotnet publish -c Release -o output
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy to Firebase Hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          firebase deploy --only hosting
