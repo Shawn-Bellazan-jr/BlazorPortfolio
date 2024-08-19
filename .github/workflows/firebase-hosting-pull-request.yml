@@ -12,10 +12,22 @@ jobs:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: dotnet publish -c Release -o release BlazorPortfolio.Client/BlazorPortfolio.Client.csproj
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
+     - name: Checkout code
+       uses: actions/checkout@v4
+     - name: Set up .NET
+       uses: actions/setup-dotnet@v3
+       with:
+         dotnet-version: '9.x'  # Use the .NET version you're using
+
+     - name: Install dependencies
+       run: dotnet restore
+ 
+     - name: Build Blazor app
+       run: dotnet publish -c Release -o release BlazorPortfolio.Client/BlazorPortfolio.Client.csproj
+
+     - name: Firebase
+       uses: FirebaseExtended/action-hosting-deploy@v0
+       with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SHAWN_DELAINE_BELLAZAN }}
           projectId: shawn-delaine-bellazan
