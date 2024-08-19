@@ -1,0 +1,23 @@
+﻿@using BlazorPortfolio.Client.Models
+@inject LinkService LinkService
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-4">
+    <MudList T="string">
+        @foreach (var link in Links)
+        {
+            <MudListItem>
+                <MudIcon Icon="@link.Icon" Class="mr-2" />
+                <MudLink Href="@link.Url" Target="_blank">@link.Name</MudLink>
+            </MudListItem>
+        }
+    </MudList>
+</MudContainer>
+
+@code {
+    private List<Link> Links = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Links = await LinkService.GetLinksAsync();
+    }
+}

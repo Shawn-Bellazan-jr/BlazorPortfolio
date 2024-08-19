@@ -1,33 +1,107 @@
 ﻿@page "/"
 @using BlazorPortfolio.Client.Models
-@inject PortfolioService _service
+@inject ProjectService ProjectService
+@inject NavigationManager _nav
 
-<PageTitle>Home</PageTitle>
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4">
+    <!-- Hero Section -->
+    <MudPaper Elevation="4" Class="hero-banner mb-6">
+        <MudText Typo="Typo.h3" Align="Align.Center">Welcome to My Portfolio</MudText>
+        <MudText Typo="Typo.body1" Align="Align.Center" Class="mt-2">
+            I am a software developer specializing in creating full-stack web applications.
+        </MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="LoadAllProjects" Class="mt-4">
+            Explore My Work
+        </MudButton>
+    </MudPaper>
 
+    <MudGrid>
+        <MudItem xs="12">
+            <MudSelect T="ProjectStatus" Label="Filter by Status" @bind-Value="_selectedStatus">
+                @foreach (var status in Enum.GetValues(typeof(ProjectStatus)).Cast<ProjectStatus>())
+                {
+                    <MudSelectItem Value="@status">@status</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
 
-@if(Portfolio == null)
-{
-    <p><em>Loading...</em></p>
+        <MudItem xs="12">
+            <div class="card-container">
+                @foreach (var project in FilteredAndSortedProjects)
+                {
+                    <div class="project-card">
+                        <h3>@project.Title</h3>
+                        <p>@project.Description</p>
+                        <div class="buttons">
+                            <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="@(() => _nav.NavigateTo(project.DemoLink))">
+                                View Demo
+                            </MudButton>
+                            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="@(() => _nav.NavigateTo(project.RepositoryLink))">
+                                View Code
+                            </MudButton>
+                        </div>
+                    </div>
+                }
+            </div>
+        </MudItem>
+    </MudGrid>
 
-} else
-{
-    <MudContainer MaxWidth="MaxWidth.Large">
-        <MudGrid>
-            @foreach (var project in Portfolio.Projects)
-            {
-                <MudItem xs="12" sm="6" md="4">
-                    <ProjectCard Project="project" />
-                </MudItem>
-            }
-        </MudGrid>
-    </MudContainer>
-}
+    <!-- Contact Section -->
+    <MudPaper Elevation="2" Class="contact-section mt-6 p-4">
+        <MudText Typo="Typo.h4" Align="Align.Center">Get In Touch</MudText>
+        <MudText Typo="Typo.body1" Align="Align.Center" Class="mt-2">
+            Interested in collaborating or just want to say hi? Feel free to reach out!
+        </MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _nav.NavigateTo("/contact"))" Class="mt-4">
+            Contact Me
+        </MudButton>
+    </MudPaper>
+
+</MudContainer>
 
 @code {
-    private Portfolio? Portfolio = new();
+    private List<Project> Projects = new();
+    private ProjectStatus _selectedStatus = ProjectStatus.NotStarted;
+    private string _sortOrder = "desc";
 
     protected override async Task OnInitializedAsync()
     {
-        Portfolio = await _service.GetPortfolioAsync();
+        Projects = await ProjectService.GetProjectsAsync();
+    }
+
+    private List<Project> FilteredAndSortedProjects
+    {
+        get
+        {
+            var filteredProjects = Projects;
+
+            if (_selectedStatus != ProjectStatus.NotStarted)
+            {
+                filteredProjects = filteredProjects
+                    .Where(p => p.Status == _selectedStatus)
+                    .ToList();
+            }
+
+            if (_sortOrder == "asc")
+            {
+                filteredProjects = filteredProjects
+                    .OrderBy(p => p.CompletionDate)
+                    .ToList();
+            }
+            else
+            {
+                filteredProjects = filteredProjects
+                    .OrderByDescending(p => p.CompletionDate)
+                    .ToList();
+            }
+
+            return filteredProjects;
+        }
+    }
+
+    private void LoadAllProjects()
+    {
+        _selectedStatus = ProjectStatus.NotStarted;
+        _sortOrder = "desc";
     }
 }

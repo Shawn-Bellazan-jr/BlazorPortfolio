@@ -1,8 +1,9 @@
 {
   "projects": [
     {
+      "id": "proj-001",
       "title": "Task Manager",
-      "description": "A full-stack application that helps users manage their tasks efficiently. It includes user authentication, task creation, editing, and deletion, along with data persistence.",
+      "description": "A full-stack application that helps users manage their tasks efficiently.",
       "technologies": [ "Blazor", "ASP.NET Core", "Entity Framework", "SQL Server" ],
       "keyFeatures": [
         "User authentication and authorization",
@@ -14,11 +15,14 @@
       "solutions": "Utilized ASP.NET Identity for secure authentication and optimized database queries to handle large datasets efficiently.",
       "screenshots": [ "task-manager-home.png", "task-manager-tasks.png" ],
       "demoLink": "https://your-demo-link.com",
-      "repositoryLink": "https://github.com/yourusername/task-manager"
+      "repositoryLink": "https://github.com/yourusername/task-manager",
+      "status": "Completed",
+      "completionDate": "2023-06-15"
     },
     {
+      "id": "proj-002",
       "title": "Weather Dashboard",
-      "description": "A Blazor-based weather dashboard that fetches real-time weather data from an external API and displays it in an interactive UI.",
+      "description": "A Blazor-based weather dashboard that fetches real-time weather data from an external API.",
       "technologies": [ "Blazor WebAssembly", "C#", "REST API" ],
       "keyFeatures": [
         "Fetches and displays real-time weather data",
@@ -30,9 +34,12 @@
       "solutions": "Implemented error handling and fallback mechanisms to ensure the app remains functional even when the API fails.",
       "screenshots": [ "weather-dashboard-home.png", "weather-dashboard-forecast.png" ],
       "demoLink": "https://your-demo-link.com",
-      "repositoryLink": "https://github.com/yourusername/weather-dashboard"
+      "repositoryLink": "https://github.com/yourusername/weather-dashboard",
+      "status": "InProgress",
+      "completionDate": null
     },
     {
+      "id": "proj-003",
       "title": "AI-Powered Chatbot",
       "description": "An AI-powered chatbot integrated into a web application, capable of answering user queries and performing simple tasks.",
       "technologies": [ "Blazor", "Azure Bot Service", "AI/ML" ],
@@ -46,7 +53,9 @@
       "solutions": "Used Azure Bot Service and integrated a natural language processing (NLP) model to enhance understanding and response accuracy.",
       "screenshots": [ "chatbot-home.png", "chatbot-conversation.png" ],
       "demoLink": "https://your-demo-link.com",
-      "repositoryLink": "https://github.com/yourusername/ai-chatbot"
+      "repositoryLink": "https://github.com/yourusername/ai-chatbot",
+      "status": "Completed",
+      "completionDate": "2024-01-10"
     }
   ]
 }

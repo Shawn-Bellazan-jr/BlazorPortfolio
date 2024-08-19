@@ -1,0 +1,25 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "this is my portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shawn-Bellazan-jr/BlazorPortfolio.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Shawn Bellazan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shawn-Bellazan-jr/BlazorPortfolio/issues"
+  },
+  "homepage": "https://github.com/Shawn-Bellazan-jr/BlazorPortfolio#readme",
+  "dependencies": {
+    "firebase": "^10.13.0"
+  }
+}

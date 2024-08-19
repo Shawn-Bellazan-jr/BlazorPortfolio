@@ -13,22 +13,25 @@ namespace BlazorPortfolio.Client.Models
         [JsonPropertyName("technologies")]
         public List<string> Technologies { get; set; }
 
-        [JsonPropertyName("keyFeatures")]
+        [JsonPropertyName("key_features")]
         public List<string> KeyFeatures { get; set; }
 
-        [JsonPropertyName("challenges")]
-        public string Challenges { get; set; }
+        [JsonPropertyName("image")]
+        public string Image { get; set; }
 
-        [JsonPropertyName("solutions")]
-        public string Solutions { get; set; }
-
-        [JsonPropertyName("screenshots")]
-        public List<string> Screenshots { get; set; }
-
-        [JsonPropertyName("demoLink")]
+        [JsonPropertyName("demo_link")]
         public string DemoLink { get; set; }
 
-        [JsonPropertyName("repositoryLink")]
+        [JsonPropertyName("repository_link")]
         public string RepositoryLink { get; set; }
+
+        [JsonPropertyName("platforms")]
+        public List<string> Platforms { get; set; }
+
+        [JsonPropertyName("status")]
+        public ProjectStatus Status { get; set; }
+        [JsonPropertyName("completion_date")]
+        public DateTime CompletionDate { get; set; } // Add this line
+
     }
 }

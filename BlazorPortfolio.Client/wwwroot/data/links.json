@@ -1,0 +1,24 @@
+{
+  "links": [
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/shawn-bellazan-769105308/",
+      "icon": "Icons.Material.Filled.LinkedIn"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/Shawn-Bellazan-jr",
+      "icon": "Icons.Material.Filled.GitHub"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://x.com/shawnbellazanjr",
+      "icon": "Icons.Material.Filled.Twitter"
+    },
+    {
+      "name": "Personal Blog",
+      "url": "https://shawn-delaine-bellazan.web.app",
+      "icon": "Icons.Material.Filled.Article"
+    }
+  ]
+}
